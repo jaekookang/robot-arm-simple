@@ -4,13 +4,29 @@ window.onload = function() {
 		context = canvas.getContext('2d'),
 		width = canvas.width = window.innerWidth,
 		height = canvas.height = window.innerHeight;
-		// console.log(width, height);
 
 	var mouseX = 0,
 		mouseY = 0;
     var fixX = 0,
         fixY = 0;
     var isDraw = true;
+
+    // (ipad touch) define touch movement
+    canvas.addEventListener('touchstart', beginMove, false);
+    canvas.addEventListener('touchend', endMove, false);
+
+    // (ipad touch) begin arm movement
+    function beginMove(e) {
+        e.preventDefault();
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    }
+
+    // (ipad touch) end arm movement
+    function endMove(e) {
+        e.preventDefault();
+        canvas.removeEventListener('touchmove', beginMove, false);
+    }
 
 	// (1) Task space
 	var iks = IKSystem.create(width/2, height/2); // define arms
@@ -23,10 +39,6 @@ window.onload = function() {
 		mouseX = event.clientX;
 		mouseY = event.clientY;
 	})
-    canvas.addEventListener("touchmove", function(e){
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-    })
 
 	update();
 

@@ -12,8 +12,8 @@ window.onload = function() {
     var isDraw = true;
 
     // (ipad touch) define touch movement
-    canvas.addEventListener('touchstart', beginMove, false);
-    canvas.addEventListener('touchend', endMove, false);
+    canvas.addEventListener('touchstart', beginMove);
+    canvas.addEventListener('touchend', endMove);
 
     // (ipad touch) begin arm movement
     function beginMove(e) {
@@ -25,7 +25,7 @@ window.onload = function() {
     // (ipad touch) end arm movement
     function endMove(e) {
         e.preventDefault();
-        canvas.removeEventListener('touchmove', beginMove, false);
+        canvas.addEventListener('touchmove', beginMove);
     }
 
 	// (1) Task space
@@ -39,6 +39,25 @@ window.onload = function() {
 		mouseX = e.clientX;
 		mouseY = e.clientY;
 	})
+    
+    // click to draw a red dot
+    canvas.addEventListener("click", function(e) {
+        context.fillStyle = "#ff2626"; // Red color
+        context.beginPath();
+        fixX = e.clientX;
+        fixY = e.clientY;
+        context.arc(fixX, fixY, 10, 0, Math.PI * 2, true);
+        context.fill();
+    })
+
+    // allow keypress to freeze
+    canvas.addEventListener('keypress', function() {
+        if (isDraw==true) {
+            isDraw = false;
+        } else {
+            isDraw = true;
+        }
+    })
 
 	update();
 
@@ -53,15 +72,6 @@ window.onload = function() {
 
 		requestAnimationFrame(update);
 	}
-
-    canvas.addEventListener("click", function(e) {
-        context.fillStyle = "#ff2626"; // Red color
-        context.beginPath();
-        fixX = e.clientX;
-        fixY = e.clientY;
-        context.arc(fixX, fixY, 10, 0, Math.PI * 2, true);
-        context.fill();
-    })
 
     function drawCoordinates(x, y) {
         context.fillStyle = "#ff2626"; // Red color
@@ -78,11 +88,4 @@ window.onload = function() {
         drawCoordinates(x,y);
     }
 
-    canvas.addEventListener('keypress', function() {
-        if (isDraw==true) {
-            isDraw = false;
-        } else {
-            isDraw = true;
-        }
-    })
 }

@@ -13,7 +13,7 @@ window.onload = function() {
 
     // (ipad touch) define touch movement
     canvas.addEventListener('touchstart', beginMove);
-    canvas.addEventListener('touchend', endMove);
+    // canvas.addEventListener('touchend', endMove);
 
     // (ipad touch) begin arm movement
     function beginMove(e) {
@@ -23,10 +23,10 @@ window.onload = function() {
     }
 
     // (ipad touch) end arm movement
-    function endMove(e) {
-        e.preventDefault();
-        canvas.addEventListener('touchmove', beginMove);
-    }
+    // function endMove(e) {
+    //     e.preventDefault();
+    //     canvas.addEventListener('touchmove', beginMove);
+    // }
 
 	// (1) Task space
 	var iks = IKSystem.create(width/2, height/2); // define arms

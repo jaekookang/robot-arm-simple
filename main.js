@@ -19,7 +19,7 @@ window.onload = function() {
 	iks.addArm(100);  // top
 
 	// track mouse movement
-	document.addEventListener("mousemove", function(e){
+	canvas.addEventListener("mousemove", function(e){
 		mouseX = event.clientX;
 		mouseY = event.clientY;
 	})
@@ -38,7 +38,7 @@ window.onload = function() {
 		requestAnimationFrame(update);
 	}
 
-    document.addEventListener("click", function(e) {
+    canvas.addEventListener("click", function(e) {
         context.fillStyle = "#ff2626"; // Red color
         context.beginPath();
         fixX = e.clientX;
@@ -62,7 +62,7 @@ window.onload = function() {
         drawCoordinates(x,y);
     }
 
-    document.addEventListener('keypress', function() {
+    canvas.addEventListener('keypress', function() {
         if (isDraw==true) {
             isDraw = false;
         } else {

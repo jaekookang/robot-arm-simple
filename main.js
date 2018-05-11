@@ -47,8 +47,8 @@ window.onload = function() {
     function drawDot(e) {
         context.fillStyle = "#ff2626"; // Red color
         context.beginPath();
-        fixX = e.clientX;
-        fixY = e.clientY;
+        fixX = e.clientX || e.pageX;
+        fixY = e.clientY || e.pageY; 
         context.arc(fixX, fixY, 10, 0, Math.PI * 2, true);
         context.fill();
     }

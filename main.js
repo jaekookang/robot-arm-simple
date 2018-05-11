@@ -18,8 +18,8 @@ window.onload = function() {
     // (ipad touch) begin arm movement
     function beginMove(e) {
         e.preventDefault();
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        mouseX = e.pageX;
+        mouseY = e.pageY;
     }
 
     // (ipad touch) end arm movement

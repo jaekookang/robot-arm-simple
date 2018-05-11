@@ -23,6 +23,10 @@ window.onload = function() {
 		mouseX = event.clientX;
 		mouseY = event.clientY;
 	})
+    canvas.addEventListener("touchmove", function(e){
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    })
 
 	update();
 

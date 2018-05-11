@@ -4,6 +4,6 @@
 
 ---
 
-![](screenshot.png)
+![](image.gif)
 
 ---

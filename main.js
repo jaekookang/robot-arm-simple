@@ -11,23 +11,6 @@ window.onload = function() {
         fixY = 0;
     var isDraw = true;
 
-    // (ipad touch) define touch movement
-    canvas.addEventListener('touchstart', beginMove);
-    // canvas.addEventListener('touchend', endMove);
-
-    // (ipad touch) begin arm movement
-    function beginMove(e) {
-        e.preventDefault();
-        mouseX = e.pageX;
-        mouseY = e.pageY;
-    }
-
-    // (ipad touch) end arm movement
-    // function endMove(e) {
-    //     e.preventDefault();
-    //     canvas.addEventListener('touchmove', beginMove);
-    // }
-
 	// (1) Task space
 	var iks = IKSystem.create(width/2, height/2); // define arms
 	iks.addArm(100);  // bottom
@@ -35,20 +18,40 @@ window.onload = function() {
 	iks.addArm(100);  // top
 
 	// track mouse movement
-	canvas.addEventListener("mousemove", function(e){
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-	})
+	canvas.addEventListener("mousemove", moveMouse)
+    // track touch movement
+    canvas.addEventListener('touchstart', moveTouch);
+    canvas.addEventListener('touchend', endTouch);
     
     // click to draw a red dot
-    canvas.addEventListener("click", function(e) {
+    canvas.addEventListener("click", drawDot);
+    canvas.addEventListener('touchstart', drawDot);
+
+    // update mouse position (desktop)
+    function moveMouse(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }
+    // update mouse movement (ipad touch) 
+    function moveTouch(e) {
+        e.preventDefault();
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+    }
+    function endTouch(e) {
+        e.preventDefault();
+        canvas.addEventListener('touchmove', moveTouch);
+    }
+
+    // draw dots
+    function drawDot() {
         context.fillStyle = "#ff2626"; // Red color
         context.beginPath();
         fixX = e.clientX;
         fixY = e.clientY;
         context.arc(fixX, fixY, 10, 0, Math.PI * 2, true);
         context.fill();
-    })
+    }
 
     // allow keypress to freeze
     canvas.addEventListener('keypress', function() {

@@ -18,8 +18,8 @@ window.onload = function() {
     // (ipad touch) begin arm movement
     function beginMove(e) {
         e.preventDefault();
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     }
 
     // (ipad touch) end arm movement
@@ -36,8 +36,8 @@ window.onload = function() {
 
 	// track mouse movement
 	canvas.addEventListener("mousemove", function(e){
-		mouseX = event.clientX;
-		mouseY = event.clientY;
+		mouseX = e.clientX;
+		mouseY = e.clientY;
 	})
 
 	update();
